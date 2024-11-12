@@ -43,7 +43,7 @@ class Api_Training_APIs {
         $userText = sanitize_text_field($_POST['userText']);
         $flaskUrl = 'http://192.168.51.11:5000/predict'; 
 
-     
+//wp_remote_post: to send a POST request from WordPress   
         $response = wp_remote_post($flaskUrl, [
             'method'    => 'POST',
             'headers'   => [
@@ -56,7 +56,7 @@ class Api_Training_APIs {
             wp_redirect(add_query_arg('error', 'API request failed', wp_get_referer()));
             exit;
         }
-
+//wp_remote_retrieve_body: to retrive the response of the post request that was sent.
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
